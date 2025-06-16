@@ -271,6 +271,13 @@ Users can extend possible experiment configurations by adding:
 * Experiment setting in [`config/env_config`](config/env_config/), and
 * New tasks in [`config/task_config`](config/task_config/).
 
+### Proposed approaches to test
+
+* (1) Greedy algorithm: Each driver/agent receives information about the decisions of all drivers/agents who started driving before them. Then, (s)he evaluates the quality of all (4-5) available options (e.g., using a SUMO simulation or a surrogate model) and selects the best one. In this case, we do not consider information about future drivers' decisions.
+* (2) The same as (1), but in evaluation, we take into account some assumptions about the future drivers' decisions (we can think which option could be the best approximation of the human decisions taken by the RL models, e.g., the shortest route, or the route from the previous day, or some smarter decisions taking into account traffic characteristics from the previous days, or some combinations).
+* (3) Evolutionary algorithms for CAVs - CAVs assume some approximation of human drivers' decisions (e.g., it can be the same approach as above) and try to make the best decision collectively, e.g., using a genetic algorithm.
+* (4) The same as (3), but the evolutionary approach is for all the drivers (both, human and CAVs). In this case, we can't control human drivers' decisions, but we can assume that we send/propose them some decisions, and some drivers will follow.
+
 ## Citation
 ```
 @misc{URB,
